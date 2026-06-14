@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cashflowinfosoft — Mobile Apps & Software</title>
+  <meta name="description" content="Cashflowinfosoft builds practical, high-quality mobile apps on Google Play. Finance tools, utilities, and more."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:    #0B1E35;
+      --navy2:   #132947;
+      --gold:    #F0A500;
+      --gold-lt: #FFD166;
+      --white:   #FFFFFF;
+      --gray:    #F4F7FA;
+      --text:    #1C2D3F;
+      --muted:   #617080;
+      --border:  #DDE3EA;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 100;
+      background: rgba(11,30,53,0.97);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5%;
+      height: 64px;
+      border-bottom: 1px solid rgba(240,165,0,0.2);
+    }
+    .nav-logo {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800; font-size: 1.2rem;
+      color: var(--white); letter-spacing: -0.3px;
+    }
+    .nav-logo span { color: var(--gold); }
+    nav ul { list-style: none; display: flex; gap: 2rem; }
+    nav ul a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none; font-size: 0.88rem; font-weight: 500;
+      transition: color 0.2s;
+    }
+    nav ul a:hover { color: var(--gold); }
+    .nav-btn {
+      background: var(--gold); color: var(--navy);
+      padding: 8px 20px; border-radius: 6px;
+      font-size: 0.85rem; font-weight: 700;
+      text-decoration: none; transition: background 0.2s;
+    }
+    .nav-btn:hover { background: var(--gold-lt); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 60%, #1a3a5c 100%);
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 100px 5% 60px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23F0A500' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    /* flow chart SVG decoration */
+    .hero-chart {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      opacity: 0.12; pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 760px; }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(240,165,0,0.15);
+      border: 1px solid rgba(240,165,0,0.35);
+      color: var(--gold-lt);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; padding: 6px 16px; border-radius: 20px;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-weight: 800; line-height: 1.12;
+      color: var(--white); margin-bottom: 1.2rem;
+      letter-spacing: -1px;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p {
+      color: rgba(255,255,255,0.68);
+      font-size: clamp(1rem, 2.2vw, 1.15rem);
+      line-height: 1.7; max-width: 540px; margin: 0 auto 2.2rem;
+    }
+    .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--gold); color: var(--navy);
+      padding: 14px 32px; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 700;
+      text-decoration: none; transition: transform 0.2s, background 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+    .btn-outline {
+      border: 1.5px solid rgba(255,255,255,0.3); color: var(--white);
+      padding: 14px 32px; border-radius: 8px;
+      font-size: 0.95rem; font-weight: 600;
+      text-decoration: none; transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: var(--gold); background: rgba(240,165,0,0.08); }
+
+    .hero-stats {
+      display: flex; justify-content: center; gap: 3rem;
+      margin-top: 4rem; padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      flex-wrap: wrap;
+    }
+    .stat-num {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.9rem; font-weight: 800; color: var(--gold);
+    }
+    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    /* SECTIONS */
+    section { padding: 90px 5%; }
+    .section-label {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 800; color: var(--navy);
+      letter-spacing: -0.5px; line-height: 1.2;
+    }
+    .section-sub {
+      color: var(--muted); font-size: 1.05rem;
+      line-height: 1.7; margin-top: 0.8rem; max-width: 520px;
+    }
+    .section-head { margin-bottom: 3rem; }
+
+    /* ABOUT */
+    .about { background: var(--gray); }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+      align-items: center; max-width: 1100px; margin: 0 auto;
+    }
+    .about-visual {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      border-radius: 16px; padding: 3rem 2rem;
+      display: flex; flex-direction: column; gap: 1.5rem;
+    }
+    .about-visual-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px; padding: 1rem 1.2rem;
+    }
+    .av-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: rgba(240,165,0,0.15);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .av-text { color: rgba(255,255,255,0.85); font-size: 0.9rem; font-weight: 500; }
+    .av-sub { color: rgba(255,255,255,0.4); font-size: 0.75rem; margin-top: 2px; }
+
+    /* FEATURES */
+    .features { background: var(--white); }
+    .features-inner { max-width: 1100px; margin: 0 auto; }
+    .features-grid {
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem;
+    }
+    .feature-card {
+      border: 1.5px solid var(--border); border-radius: 14px;
+      padding: 1.8rem; transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .feature-card:hover {
+      border-color: var(--gold);
+      box-shadow: 0 4px 20px rgba(240,165,0,0.1);
+    }
+    .feat-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.2rem;
+    }
+    .feature-card h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.05rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 0.5rem;
+    }
+    .feature-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+
+    /* APPS */
+    .apps { background: var(--gray); }
+    .apps-inner { max-width: 1100px; margin: 0 auto; }
+    .apps-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 1.5rem; }
+    .app-card {
+      background: var(--white); border-radius: 14px;
+      padding: 1.8rem; display: flex; gap: 1.2rem; align-items: flex-start;
+      border: 1.5px solid var(--border);
+      transition: box-shadow 0.2s;
+    }
+    .app-card:hover { box-shadow: 0 6px 24px rgba(0,0,0,0.07); }
+    .app-icon {
+      width: 56px; height: 56px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--navy), #1a4a7a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem; flex-shrink: 0;
+    }
+    .app-info h3 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 4px;
+    }
+    .app-info p { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+    .app-badge {
+      display: inline-block; margin-top: 8px;
+      background: rgba(11,30,53,0.07); color: var(--navy2);
+      font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 20px;
+    }
+
+    /* CONTACT */
+    .contact {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+      text-align: center;
+    }
+    .contact .section-title { color: var(--white); }
+    .contact .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto; }
+    .contact-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px; padding: 2.5rem;
+      max-width: 500px; margin: 2.5rem auto 0;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      color: rgba(255,255,255,0.8); font-size: 0.95rem;
+      margin-bottom: 1.2rem;
+    }
+    .contact-item:last-child { margin-bottom: 0; }
+    .contact-item span { font-size: 1.3rem; }
+    .contact-item a { color: var(--gold-lt); text-decoration: none; }
+    .contact-item a:hover { text-decoration: underline; }
+
+    /* FOOTER */
+    footer {
+      background: #060f1a;
+      color: rgba(255,255,255,0.4);
+      text-align: center; padding: 2rem 5%;
+      font-size: 0.82rem;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .features-grid { grid-template-columns: 1fr; }
+      .apps-grid { grid-template-columns: 1fr; }
+      .hero-stats { gap: 2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Cashflow<span>Infosoft</span></div>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#features">Features</a></li>
+    <li><a href="#apps">Apps</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="https://play.google.com/store" class="nav-btn">Play Store</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <svg class="hero-chart" viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+    <polyline points="0,160 180,130 360,100 540,80 720,60 900,75 1080,50 1260,30 1440,20"
+      fill="none" stroke="#F0A500" stroke-width="2"/>
+    <polyline points="0,180 180,165 360,150 540,140 720,120 900,130 1080,100 1260,80 1440,70"
+      fill="none" stroke="#F0A500" stroke-width="1"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-badge">Google Play Developer</div>
+    <h1>Smart Apps for <em>Everyday Life</em></h1>
+    <p>Cashflowinfosoft builds practical, well-crafted mobile applications. From finance tools to productivity utilities — designed for real people.</p>
+    <div class="hero-actions">
+      <a href="#apps" class="btn-primary">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        View Our Apps
+      </a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">10+</div>
+        <div class="stat-label">Apps Published</div>
+      </div>
+      <div>
+        <div class="stat-num">50K+</div>
+        <div class="stat-label">Downloads</div>
+      </div>
+      <div>
+        <div class="stat-num">4.5★</div>
+        <div class="stat-label">Average Rating</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-grid">
+    <div>
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title">Building apps that actually work</h2>
+      <p class="section-sub">Cashflowinfosoft is an independent app development company focused on creating lightweight, reliable Android apps. We believe great software should be simple, fast, and useful — without unnecessary clutter.</p>
+      <p class="section-sub" style="margin-top:1rem;">All our apps are available on Google Play and regularly updated to meet the latest Android standards.</p>
+    </div>
+    <div class="about-visual">
+      <div class="about-visual-item">
+        <div class="av-icon">📱</div>
+        <div>
+          <div class="av-text">Android First</div>
+          <div class="av-sub">Native apps built for performance</div>
+        </div>
+      </div>
+      <div class="about-visual-item">
+        <div class="av-icon">🔒</div>
+        <div>
+          <div class="av-text">Privacy Focused</div>
+          <div class="av-sub">Minimal data collection, full transparency</div>
+        </div>
+      </div>
+      <div class="about-visual-item">
+        <div class="av-icon">⚡</div>
+        <div>
+          <div class="av-text">Regular Updates</div>
+          <div class="av-sub">Actively maintained and improved</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="features-inner">
+    <div class="section-head">
+      <div class="section-label">Why Choose Us</div>
+      <h2 class="section-title">Our Commitment</h2>
+      <p class="section-sub">Every app we publish meets a high standard of quality, usability, and trust.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feat-icon">🎯</div>
+        <h3>Purpose-Built</h3>
+        <p>Each app solves one problem well. No bloat, no unnecessary permissions, no hidden fees.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🛡️</div>
+        <h3>Safe & Secure</h3>
+        <p>We follow Google Play's best practices and keep our apps updated against security vulnerabilities.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">📊</div>
+        <h3>Finance Focused</h3>
+        <p>Our core expertise is in financial tools — budgeting, cash flow tracking, and expense management.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🌐</div>
+        <h3>Multi-language</h3>
+        <p>Apps are available in multiple languages to serve users across India and beyond.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">🆓</div>
+        <h3>Free to Use</h3>
+        <p>Most of our apps are free or offer a generous free tier — quality software for everyone.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feat-icon">💬</div>
+        <h3>User Support</h3>
+        <p>We respond to user reviews and support emails to keep improving our apps continuously.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPS -->
+<section class="apps" id="apps">
+  <div class="apps-inner">
+    <div class="section-head">
+      <div class="section-label">Our Portfolio</div>
+      <h2 class="section-title">Apps on Google Play</h2>
+      <p class="section-sub">A growing collection of practical tools for Android users.</p>
+    </div>
+    <div class="apps-grid">
+      <div class="app-card">
+        <div class="app-icon">💰</div>
+        <div class="app-info">
+          <h3>Cash Flow Tracker</h3>
+          <p>Track income and expenses, visualize your cash flow, and take control of your personal finances.</p>
+          <span class="app-badge">Finance</span>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">📋</div>
+        <div class="app-info">
+          <h3>Budget Planner</h3>
+          <p>Simple monthly budgeting tool. Set limits, track spending, and get alerts when you're close to your budget.</p>
+          <span class="app-badge">Finance</span>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">🧮</div>
+        <div class="app-info">
+          <h3>EMI Calculator</h3>
+          <p>Quickly calculate EMI, total interest, and repayment schedules for any loan or mortgage.</p>
+          <span class="app-badge">Utilities</span>
+        </div>
+      </div>
+      <div class="app-card">
+        <div class="app-icon">📈</div>
+        <div class="app-info">
+          <h3>Expense Manager</h3>
+          <p>Record daily expenses, generate reports, and export data. Stay on top of where your money goes.</p>
+          <span class="app-badge">Finance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="section-label" style="color:var(--gold-lt)">Reach Out</div>
+  <h2 class="section-title">Contact Us</h2>
+  <p class="section-sub">Have questions, feedback, or want to report an issue? We'd love to hear from you.</p>
+  <div class="contact-box">
+    <div class="contact-item">
+      <span>✉️</span>
+      <div>Email: <a href="mailto:support@cashflowinfosoft.com">support@cashflowinfosoft.com</a></div>
+    </div>
+    <div class="contact-item">
+      <span>🌐</span>
+      <div>Website: <a href="#">cashflowinfosoft.github.io</a></div>
+    </div>
+    <div class="contact-item">
+      <span>📍</span>
+      <div>Hyderabad, Telangana, India</div>
+    </div>
+    <div class="contact-item">
+      <span>🔒</span>
+      <div><a href="privacy-policy.html">Privacy Policy</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2024 Cashflowinfosoft. All rights reserved. &nbsp;|&nbsp; <a href="privacy-policy.html">Privacy Policy</a></p>
+</footer>
+
+</body>
+</html>
