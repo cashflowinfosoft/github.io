@@ -1,1 +1,5 @@
+# Cashflowinfosoft - Authorized Digital Sellers
+# https://cashflowinfosoft.github.io/app-ads.txt
+# Last updated: 2025
+
 google.com, pub-8604419589691979, DIRECT, f08c47fec0942fa0
